@@ -14,6 +14,7 @@ var (
 
 type IRepository interface {
 	FindUserByEmail(ctx context.Context, email string) (*model.User, error)
+	Insert(ctx context.Context, user *model.User) error
 }
 
 type Repository struct {

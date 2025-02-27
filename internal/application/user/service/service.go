@@ -8,6 +8,7 @@ import (
 
 type IService interface {
 	Identify(ctx context.Context, email string) (IdentifyOutput, error)
+	Register(ctx context.Context, input RegisterInput) error
 }
 
 type Service struct {
