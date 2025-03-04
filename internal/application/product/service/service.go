@@ -4,12 +4,14 @@ import (
 	"context"
 	"errors"
 
+	"github.com/radityacandra/ecommerce-connector-cli/internal/application/product/client/fakestore"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/application/product/model"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/application/product/repository"
 )
 
 type Service struct {
-	Repository repository.IRepository
+	Repository      repository.IRepository
+	FakestoreClient fakestore.ClientInterface
 }
 
 type IService interface {

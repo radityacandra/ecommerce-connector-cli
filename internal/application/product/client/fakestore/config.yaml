@@ -1,0 +1,5 @@
+package: fakestore
+output: fakestore.gen.go
+generate:
+  models: true
+  client: true
