@@ -18,8 +18,12 @@ func (s *Service) Add(ctx context.Context, input model.Product) error {
 
 	product := model.NewProduct(uuid.NewString(), input.Name, input.Description, input.Category, input.Price, input.EanCode, input.UserId)
 	err = s.Repository.Insert(ctx, product)
+	if err != nil {
+		return err
+	}
 
-	// TODO: product integration
+	err = s.ProductClient.AddProduct(ctx, *product)
+	// TODO: save product integration
 
 	return err
 }
