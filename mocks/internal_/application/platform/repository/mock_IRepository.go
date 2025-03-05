@@ -80,6 +80,65 @@ func (_c *MockIRepository_FindPlatformByUserIdAndType_Call) RunAndReturn(run fun
 	return _c
 }
 
+// GetPlatformByUserId provides a mock function with given fields: ctx, userId
+func (_m *MockIRepository) GetPlatformByUserId(ctx context.Context, userId string) ([]repository.FindByUserIdAndTypeOutput, error) {
+	ret := _m.Called(ctx, userId)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetPlatformByUserId")
+	}
+
+	var r0 []repository.FindByUserIdAndTypeOutput
+	var r1 error
+	if rf, ok := ret.Get(0).(func(context.Context, string) ([]repository.FindByUserIdAndTypeOutput, error)); ok {
+		return rf(ctx, userId)
+	}
+	if rf, ok := ret.Get(0).(func(context.Context, string) []repository.FindByUserIdAndTypeOutput); ok {
+		r0 = rf(ctx, userId)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]repository.FindByUserIdAndTypeOutput)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(context.Context, string) error); ok {
+		r1 = rf(ctx, userId)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// MockIRepository_GetPlatformByUserId_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetPlatformByUserId'
+type MockIRepository_GetPlatformByUserId_Call struct {
+	*mock.Call
+}
+
+// GetPlatformByUserId is a helper method to define mock.On call
+//   - ctx context.Context
+//   - userId string
+func (_e *MockIRepository_Expecter) GetPlatformByUserId(ctx interface{}, userId interface{}) *MockIRepository_GetPlatformByUserId_Call {
+	return &MockIRepository_GetPlatformByUserId_Call{Call: _e.mock.On("GetPlatformByUserId", ctx, userId)}
+}
+
+func (_c *MockIRepository_GetPlatformByUserId_Call) Run(run func(ctx context.Context, userId string)) *MockIRepository_GetPlatformByUserId_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(context.Context), args[1].(string))
+	})
+	return _c
+}
+
+func (_c *MockIRepository_GetPlatformByUserId_Call) Return(_a0 []repository.FindByUserIdAndTypeOutput, _a1 error) *MockIRepository_GetPlatformByUserId_Call {
+	_c.Call.Return(_a0, _a1)
+	return _c
+}
+
+func (_c *MockIRepository_GetPlatformByUserId_Call) RunAndReturn(run func(context.Context, string) ([]repository.FindByUserIdAndTypeOutput, error)) *MockIRepository_GetPlatformByUserId_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // Insert provides a mock function with given fields: _a0, _a1
 func (_m *MockIRepository) Insert(_a0 context.Context, _a1 *model.Platform) error {
 	ret := _m.Called(_a0, _a1)
