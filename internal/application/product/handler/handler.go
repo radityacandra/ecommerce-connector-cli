@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"github.com/go-playground/validator/v10"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/application/product/client/fakestore"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/application/product/repository"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/application/product/service"
@@ -8,7 +9,8 @@ import (
 )
 
 type Handler struct {
-	Service service.IService
+	Service   service.IService
+	Validator *validator.Validate
 }
 
 func NewHandler(deps *core.Dependency) *Handler {

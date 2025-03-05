@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/go-playground/validator/v10"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/application/platform/service"
 )
 
@@ -14,8 +13,7 @@ func (h *Handler) SetPlatform(ctx context.Context, userId, platformType string) 
 		PlatformType: platformType,
 	}
 
-	validate := validator.New(validator.WithRequiredStructEnabled())
-	err := validate.Struct(input)
+	err := h.Validator.Struct(input)
 	if err != nil {
 		return err
 	}

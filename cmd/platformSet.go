@@ -26,6 +26,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/go-playground/validator/v10"
 	configHandler "github.com/radityacandra/ecommerce-connector-cli/internal/application/config/handler"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/application/platform/handler"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/core"
@@ -57,7 +58,7 @@ var platformSetCmd = &cobra.Command{
 			return
 		}
 
-		dep := core.NewDependency(db)
+		dep := core.NewDependency(db, validator.New(validator.WithRequiredStructEnabled()))
 
 		handler := handler.NewHandler(dep)
 		err = handler.SetPlatform(ctx, c.UserId, platformType)

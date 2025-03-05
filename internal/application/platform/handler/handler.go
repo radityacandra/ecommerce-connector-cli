@@ -1,13 +1,15 @@
 package handler
 
 import (
+	"github.com/go-playground/validator/v10"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/application/platform/repository"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/application/platform/service"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/core"
 )
 
 type Handler struct {
-	Service service.IService
+	Service   service.IService
+	Validator *validator.Validate
 }
 
 func NewHandler(deps *core.Dependency) *Handler {
@@ -15,6 +17,7 @@ func NewHandler(deps *core.Dependency) *Handler {
 	service := service.NewService(repository)
 
 	return &Handler{
-		Service: service,
+		Service:   service,
+		Validator: deps.Validator,
 	}
 }

@@ -26,6 +26,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/application/product/handler"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/core"
 	"github.com/radityacandra/ecommerce-connector-cli/pkg/database"
@@ -66,7 +67,7 @@ var addProductCmd = &cobra.Command{
 			return
 		}
 
-		dep := core.NewDependency(db)
+		dep := core.NewDependency(db, validator.New(validator.WithRequiredStructEnabled()))
 
 		handler := handler.NewHandler(dep)
 		err = handler.Add(ctx, c.UserId)

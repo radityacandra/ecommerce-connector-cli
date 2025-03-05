@@ -11,6 +11,10 @@ func (h *Handler) Identify(ctx context.Context) error {
 	var email string
 	fmt.Scan(&email)
 
+	if err := h.Validator.Var(email, "required,email"); err != nil {
+		return err
+	}
+
 	user, err := h.UserService.Identify(ctx, email)
 	if err != nil {
 		return err

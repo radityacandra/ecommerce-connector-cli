@@ -4,16 +4,14 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/go-playground/validator/v10"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/application/user/service"
 )
 
 func (h *Handler) Register(ctx context.Context) (err error) {
-	validate := validator.New(validator.WithRequiredStructEnabled())
 	var input service.RegisterInput
 	firstValidate := true
 	for {
-		err = validate.StructCtx(ctx, input)
+		err = h.Validator.StructCtx(ctx, input)
 		if err == nil {
 			break
 		}

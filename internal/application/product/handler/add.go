@@ -29,6 +29,10 @@ func (h *Handler) Add(ctx context.Context, userId string) error {
 	fmt.Print("provide product ean code: ")
 	product.EanCode = io.ScanString(os.Stdin)
 
+	if err := h.Validator.Struct(product); err != nil {
+		return err
+	}
+
 	err := h.Service.Add(ctx, product)
 	if err == nil {
 		fmt.Println("product has been added")
