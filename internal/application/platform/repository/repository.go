@@ -15,6 +15,7 @@ type Repository struct {
 type IRepository interface {
 	FindPlatformByUserIdAndType(context.Context, FindByUserIdAndTypeInput) (FindByUserIdAndTypeOutput, error)
 	Insert(context.Context, *model.Platform) error
+	GetPlatformByUserId(ctx context.Context, userId string) ([]FindByUserIdAndTypeOutput, error)
 }
 
 var (
