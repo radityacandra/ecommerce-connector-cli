@@ -28,6 +28,7 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/application/product/handler"
+	"github.com/radityacandra/ecommerce-connector-cli/internal/application/product/model"
 	"github.com/radityacandra/ecommerce-connector-cli/internal/core"
 	"github.com/radityacandra/ecommerce-connector-cli/pkg/database"
 	"github.com/spf13/cobra"
@@ -70,7 +71,8 @@ var addProductCmd = &cobra.Command{
 		dep := core.NewDependency(db, validator.New(validator.WithRequiredStructEnabled()))
 
 		handler := handler.NewHandler(dep)
-		err = handler.Add(ctx, c.UserId)
+		product.UserId = c.UserId
+		err = handler.Add(ctx, product)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
@@ -78,17 +80,15 @@ var addProductCmd = &cobra.Command{
 	},
 }
 
+var product model.Product
+
 func init() {
 	productCmd.AddCommand(addProductCmd)
 	rootCmd.AddCommand(productCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// productCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// productCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	addProductCmd.Flags().StringVarP(&product.Name, "product-name", "n", "", "specify product name")
+	addProductCmd.Flags().StringVarP(&product.Description, "product-description", "d", "", "specify product description")
+	addProductCmd.Flags().IntVarP(&product.Price, "product-price", "p", 0, "specify product price")
+	addProductCmd.Flags().StringVarP(&product.Category, "product-category", "c", "", "specify product category")
+	addProductCmd.Flags().StringVarP(&product.EanCode, "product-ean", "e", "", "specify product ean code")
 }

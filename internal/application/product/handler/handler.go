@@ -19,6 +19,7 @@ func NewHandler(deps *core.Dependency) *Handler {
 	service := service.NewService(repository, fakestoreClient)
 
 	return &Handler{
-		Service: service,
+		Service:   service,
+		Validator: deps.Validator,
 	}
 }

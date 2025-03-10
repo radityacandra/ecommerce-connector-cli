@@ -7,7 +7,7 @@ type Product struct {
 	Category    string `validate:"required" firestore:"category"`
 	Price       int    `validate:"required,gt=0" firestore:"price"`
 	EanCode     string `validate:"required" firestore:"ean_code"`
-	UserId      string `validate:"required" firestore:"user_id"`
+	UserId      string `validate:"required,uuid" firestore:"user_id"`
 }
 
 func NewProduct(id, name, description, category string, price int, eanCode, userId string) *Product {

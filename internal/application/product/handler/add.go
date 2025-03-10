@@ -9,25 +9,31 @@ import (
 	"github.com/radityacandra/ecommerce-connector-cli/pkg/io"
 )
 
-func (h *Handler) Add(ctx context.Context, userId string) error {
-	var product = model.Product{
-		UserId: userId,
+func (h *Handler) Add(ctx context.Context, product model.Product) error {
+	if product.Name == "" {
+		fmt.Print("provide product name: ")
+		product.Name = io.ScanString(os.Stdin)
 	}
 
-	fmt.Print("provide product name: ")
-	product.Name = io.ScanString(os.Stdin)
+	if product.Description == "" {
+		fmt.Print("provide product description: ")
+		product.Description = io.ScanString(os.Stdin)
+	}
 
-	fmt.Print("provide product description: ")
-	product.Description = io.ScanString(os.Stdin)
+	if product.Price == 0 {
+		fmt.Print("provide product price: ")
+		product.Price = io.ScanInt(os.Stdin)
+	}
 
-	fmt.Print("provide product price: ")
-	product.Price = io.ScanInt(os.Stdin)
+	if product.Category == "" {
+		fmt.Print("provide product category: ")
+		product.Category = io.ScanString(os.Stdin)
+	}
 
-	fmt.Print("provide product category: ")
-	product.Category = io.ScanString(os.Stdin)
-
-	fmt.Print("provide product ean code: ")
-	product.EanCode = io.ScanString(os.Stdin)
+	if product.EanCode == "" {
+		fmt.Print("provide product ean code: ")
+		product.EanCode = io.ScanString(os.Stdin)
+	}
 
 	if err := h.Validator.Struct(product); err != nil {
 		return err
